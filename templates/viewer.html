@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>Scrub-to-keyword</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+        function scrubTo(time) {
+            document.getElementById("audio-container-element").currentTime = time;
+            document.getElementById("audio-container-element").play();
+        }
+
+    </script>
+    <div>
+        <div id="audio-container">
+            <video id="audio-container-element" controls src="{{ audio_source }}"></video>
+        </div>
+        <div id="audio-keywords">
+            <h3>Keywords</h3>
+            <ul>
+                {% for kw in audio_keywords %}
+                <li>{{ kw }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="audio-transcript">
+            <h3>Transcript</h3>
+            <ul>
+                {% for line in transcription %}
+                <li><a onclick="scrubTo({{line[0]}})" href="#">{{line[0]}}: {{line[1]}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+  </body>
+</html>
